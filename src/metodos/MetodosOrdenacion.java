@@ -42,6 +42,29 @@ public class MetodosOrdenacion {
         
         return v;
     }
+	
+	public Integer[] Shell(Integer[] arreglo){
+		Integer[] aux = arreglo;
+		
+		Integer n = aux.length;
+		Integer incremento = 0;
+		do{
+			for(int i = 0; i < incremento; i++){
+				for(int j = incremento + i; j < aux.length; j += incremento){
+					int k = j;
+					while(k - incremento >= 0 && aux[k] < aux[k - incremento]){
+						int aux2 = aux[k];
+						aux[k] = aux[k - incremento];
+						aux[k - incremento] = aux2;
+						k -= incremento;
+					}
+				}
+			}
+			
+		}while(incremento > 1);
+		
+		return aux;
+	}
  
     private  void hacerMonticulo(Integer[] v, Integer nodo, Integer fin) {
     	Integer izq = 2*nodo+1;

@@ -38,10 +38,12 @@ public class Aplicacion extends JFrame implements ActionListener {
 		informacion = new JLabel("Informacion");
 		
 		text = new JTextArea();
+		text.setEditable(false);
 		scrollPane = new JScrollPane(text);
 		scrollPane.setBounds(20, 20, 450, 150);
 		
 		text2 = new JTextArea();
+		text2.setEditable(false);
 		scrollPane2 = new JScrollPane(text2);
 		scrollPane2.setBounds(20, 190, 450, 150);
 		
@@ -104,6 +106,8 @@ public class Aplicacion extends JFrame implements ActionListener {
 		items2[0].addActionListener(this);
 		items2[4].addActionListener(this);
 		
+		items3.addActionListener(this);
+		
 		this.configuracion();
 	}
 	
@@ -149,6 +153,16 @@ public class Aplicacion extends JFrame implements ActionListener {
            this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
         }
 		
+		if(e.getSource() == items2[1]){
+	           Integer[] aux = this.mo.Shell(this.lectura.ArrayInteger());
+	           String txt = "";
+	           for(Integer i: aux){
+	        	   txt += i+ " ";
+	           }
+	           this.text2.setText(txt);
+	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	        }
+		
 		if(e.getSource() == items2[4]){
 	           Integer[] aux = this.mo.Heap(this.lectura.ArrayInteger());
 	           String txt = "";
@@ -157,6 +171,10 @@ public class Aplicacion extends JFrame implements ActionListener {
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
-	        }
+	     }
+		
+		if(e.getSource() == items3){
+            JOptionPane.showMessageDialog(null, "Creado por Daniel Brena Aquino");
+        }
 	}
 }

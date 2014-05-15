@@ -4,21 +4,27 @@ import tiempo.Tiempo;
 
 public class MetodosOrdenacion {
 	private Tiempo tiempo;
-
+	private Integer comparaciones;
+	private Integer swaps;
+	
 	public MetodosOrdenacion(){
 		this.tiempo = new Tiempo();
 	}
 	
 	public Integer[] Burbuja(Integer[] arreglo){
+		this.comparaciones = 0;
+		this.swaps = 0;
 		Integer[] aux = arreglo;
 		Integer aux1;
 		this.tiempo.inicia();
 		for(int i = 0; i < aux.length-1; i++){
 			for(int j = 0; j< aux.length-1; j++){
+				this.comparaciones++;
 				if(aux[j + 1] < aux[j]){
 					aux1 = aux[j+1];
 					aux[j+1] = aux[j];
 					aux[j] = aux1;
+					this.swaps++;
 				}
 			}
 		}
@@ -44,24 +50,27 @@ public class MetodosOrdenacion {
     }
 	
 	public Integer[] Shell(Integer[] arreglo){
+		this.comparaciones = 0;
+		this.swaps = 0;
 		Integer[] aux = arreglo;
 		
-		Integer n = aux.length;
-		Integer incremento = 0;
-		do{
-			for(int i = 0; i < incremento; i++){
-				for(int j = incremento + i; j < aux.length; j += incremento){
-					int k = j;
-					while(k - incremento >= 0 && aux[k] < aux[k - incremento]){
-						int aux2 = aux[k];
-						aux[k] = aux[k - incremento];
-						aux[k - incremento] = aux2;
-						k -= incremento;
-					}
+		Integer k = aux.length/2;
+		this.tiempo.inicia();
+		while(k >= 1){
+			for(int i = k; i < aux.length; i++){
+				Integer v = aux[i];
+				Integer j = i - k;
+				
+				while(j >= 0 && aux[j] > v){
+					aux[j + k] = aux[j];
+					j-= k;
 				}
+				aux[j + k] = v;
 			}
+			k /=2;
 			
-		}while(incremento > 1);
+		}
+		this.tiempo.termina();
 		
 		return aux;
 	}
@@ -81,6 +90,50 @@ public class MetodosOrdenacion {
         }
     }
 	
+    
+    public Integer[] Insercion(Integer[] arreglo){
+    	this.comparaciones = 0;
+		this.swaps = 0;
+    	Integer[] aux = arreglo;
+    	Integer aux_n = 0;
+    	this.tiempo.inicia();
+    	for (int i = 1; i < aux.length; i++) {
+    		System.out.println(i);
+            aux_n = aux[i];
+            for (int j = i-1; j >=0 && aux[j]>aux_n; j--) {
+            	
+                aux[j+1]=aux[j];
+                aux[j]=aux_n;
+            }
+        }
+    	this.tiempo.termina();
+    	return aux;
+    }
+    
+    public Integer[] Seleccion(Integer[] arreglo){
+    	this.comparaciones = 0;
+		this.swaps = 0;
+    	Integer[] aux = arreglo;
+    	Integer n = aux.length;
+    	this.tiempo.inicia();
+        for(int i=0; i<n; i++) {
+            int posMenor = i;
+            for(int j=i+1; j<n; j++) {
+                if(aux[j] < aux[posMenor]){
+                	posMenor=j;
+                }
+            }
+            if(posMenor!=i) {
+                int tmp  = aux[i];
+                aux[i] = aux[posMenor];
+                aux[posMenor] = tmp;
+            }
+        }
+        this.tiempo.termina();
+        return aux;
+    }
+    
+    
 	
 	public Tiempo getTiempo() {
 		return tiempo;
@@ -89,6 +142,23 @@ public class MetodosOrdenacion {
 	public void setTiempo(Tiempo tiempo) {
 		this.tiempo = tiempo;
 	}
+
+	public Integer getComparaciones() {
+		return comparaciones;
+	}
+
+	public void setComparaciones(Integer comparaciones) {
+		this.comparaciones = comparaciones;
+	}
+
+	public Integer getSwaps() {
+		return swaps;
+	}
+
+	public void setSwaps(Integer swaps) {
+		this.swaps = swaps;
+	}
+	
 	
 	
 	

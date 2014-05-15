@@ -26,6 +26,10 @@ public class Aplicacion extends JFrame implements ActionListener {
 	
 	JLabel informacion;
 	
+	JLabel comparaciones;
+	
+	JLabel swaps;
+	
 	String archivo ;
 	
 	Lectura lectura;
@@ -34,31 +38,35 @@ public class Aplicacion extends JFrame implements ActionListener {
 	public Aplicacion(){
 		super("Ordenamiento");
 		
-		mo = new MetodosOrdenacion();
-		informacion = new JLabel("Informacion");
+		this.mo = new MetodosOrdenacion();
+		this.informacion = new JLabel("Informacion");
+		this.comparaciones = new JLabel("Comparaciones");
+		this.swaps = new JLabel("Swaps");
 		
-		text = new JTextArea();
-		text.setEditable(false);
-		scrollPane = new JScrollPane(text);
-		scrollPane.setBounds(20, 20, 450, 150);
+		this.text = new JTextArea();
+		this.text.setEditable(false);
+		this.scrollPane = new JScrollPane(text);
+		this.scrollPane.setBounds(20, 20, 450, 150);
 		
-		text2 = new JTextArea();
-		text2.setEditable(false);
-		scrollPane2 = new JScrollPane(text2);
-		scrollPane2.setBounds(20, 190, 450, 150);
+		this.text2 = new JTextArea();
+		this.text2.setEditable(false);
+		this.scrollPane2 = new JScrollPane(text2);
+		this.scrollPane2.setBounds(20, 190, 450, 150);
 		
-		informacion.setBounds(20, 350, 450, 20);
+		this.informacion.setBounds(20, 350, 450, 20);
+		this.comparaciones.setBounds(20, 375, 450, 20);
+		this.swaps.setBounds(20, 400, 450, 20);
 		
-		setLayout(null);
-		menu = new JMenuBar();
-		setJMenuBar(menu);
-		submenu1 = new JMenu("Archivo");
-		submenu2 = new JMenu("Ordenar");
-		submenu3 = new JMenu("Ayuda");
+		super.setLayout(null);
+		this.menu = new JMenuBar();
+		super.setJMenuBar(menu);
+		this.submenu1 = new JMenu("Archivo");
+		this.submenu2 = new JMenu("Ordenar");
+		this.submenu3 = new JMenu("Ayuda");
 		
-		items1 = new JMenuItem[3];
-		items2 = new JMenuItem[7];
-		items3 = new JMenuItem("Acerca De");
+		this.items1 = new JMenuItem[3];
+		this.items2 = new JMenuItem[7];
+		this.items3 = new JMenuItem("Acerca De");
 		
 		
 		
@@ -98,12 +106,17 @@ public class Aplicacion extends JFrame implements ActionListener {
 		super.add(scrollPane2);
 		
 		super.add(informacion);
+		super.add(comparaciones);
+		super.add(swaps);
 		
 		items1[0].addActionListener(this);
 		items1[1].addActionListener(this);
 		items1[2].addActionListener(this);
 		
 		items2[0].addActionListener(this);
+		items2[1].addActionListener(this);
+		items2[2].addActionListener(this);
+		items2[3].addActionListener(this);
 		items2[4].addActionListener(this);
 		
 		items3.addActionListener(this);
@@ -128,6 +141,7 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items1[0]){
 			
 			try {
+				
 				this.lectura = new Lectura(JOptionPane.showInputDialog("Ruta del Archivo"));
 				this.lectura.generar();
 				this.text.setText(this.lectura.getTexto());
@@ -151,6 +165,8 @@ public class Aplicacion extends JFrame implements ActionListener {
            }
            this.text2.setText(txt);
            this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+           this.swaps.setText("Swaps: " + this.mo.getSwaps());
         }
 		
 		if(e.getSource() == items2[1]){
@@ -161,7 +177,33 @@ public class Aplicacion extends JFrame implements ActionListener {
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
-	        }
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
+	     }
+		
+		if(e.getSource() == items2[2]){
+	           Integer[] aux = this.mo.Insercion(this.lectura.ArrayInteger());
+	           String txt = "";
+	           for(Integer i: aux){
+	        	   txt += i+ " ";
+	           }
+	           this.text2.setText(txt);
+	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
+	     }
+		
+		if(e.getSource() == items2[3]){
+	           Integer[] aux = this.mo.Seleccion(this.lectura.ArrayInteger());
+	           String txt = "";
+	           for(Integer i: aux){
+	        	   txt += i+ " ";
+	           }
+	           this.text2.setText(txt);
+	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
+	     }
 		
 		if(e.getSource() == items2[4]){
 	           Integer[] aux = this.mo.Heap(this.lectura.ArrayInteger());

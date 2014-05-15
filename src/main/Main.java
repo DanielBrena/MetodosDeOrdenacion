@@ -3,6 +3,8 @@ package main;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.swing.JFileChooser;
+
 import metodos.MetodosOrdenacion;
 import excepcion.ExceptionArchivo;
 import gui.Aplicacion;
@@ -25,5 +27,7 @@ public class Main {
 		mo.getTiempo().mostrarDiferencia();
 		*/
 		Aplicacion app = new Aplicacion();
+		
+		
 	}
 }

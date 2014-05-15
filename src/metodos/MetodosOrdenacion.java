@@ -133,8 +133,70 @@ public class MetodosOrdenacion {
         return aux;
     }
     
-    
+    public  Integer[] QuickSort(Integer[] arreglo) {
+    	this.comparaciones = 0;
+		this.swaps = 0;
+    	Integer[] aux = arreglo;
+        Integer n = aux.length;
+        this.tiempo.inicia();
+        quickSort(aux,0,n-1);
+        this.tiempo.termina();
+        return aux;
+    }
+    public  void quickSort(Integer[] arreglo, int inicio, int fin) {
+        if(inicio>=fin) return ;
+        int pivote = arreglo[inicio];
+        int izq    = inicio+1;
+        int der    = fin;
+        while(izq<=der) {
+            while(izq<=fin   && arreglo[izq]< pivote) izq++;
+            while(der>inicio && arreglo[der]>=pivote) der--;
+            if(izq<der) {
+                int tmp = arreglo[izq];
+                arreglo[izq]  = arreglo[der];
+                arreglo[der]  = tmp;
+            }
+        }
+        if(der>inicio) {
+            int tmp  = arreglo[inicio];
+            arreglo[inicio]= arreglo[der];
+            arreglo[der]   = tmp;
+        }
+        quickSort(arreglo,inicio, der-1);
+        quickSort(arreglo, der+1, fin);
+    }
 	
+    public Integer[] BurbujaMejorada(Integer[] arreglo){ 
+    	Integer[] aux = arreglo;
+    	int i=0; 
+        boolean cambio=true; 
+        this.tiempo.inicia();
+        while((i<aux.length)&&(cambio)){ 
+
+            cambio=false; 
+
+            for(int c=0; c<((aux.length)-(i+1));c++){ 
+
+                if(aux[c]>aux[c+1]){ 
+
+                   
+                    
+                    int aux2=aux[c]; 
+                    aux[c]=aux[c+1]; 
+                    aux[c+1]=aux2; 
+                    
+                    cambio=true; 
+                } 
+
+            } 
+
+            i++; 
+        } 
+        this.tiempo.termina();
+        return aux;
+    
+    } 
+    
 	public Tiempo getTiempo() {
 		return tiempo;
 	}

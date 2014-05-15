@@ -118,7 +118,8 @@ public class Aplicacion extends JFrame implements ActionListener {
 		items2[2].addActionListener(this);
 		items2[3].addActionListener(this);
 		items2[4].addActionListener(this);
-		
+		items2[5].addActionListener(this);
+		items2[6].addActionListener(this);
 		items3.addActionListener(this);
 		
 		this.configuracion();
@@ -213,6 +214,33 @@ public class Aplicacion extends JFrame implements ActionListener {
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
+	     }
+		
+		if(e.getSource() == items2[5]){
+	           Integer[] aux = this.mo.BurbujaMejorada(this.lectura.ArrayInteger());
+	           String txt = "";
+	           for(Integer i: aux){
+	        	   txt += i+ " ";
+	           }
+	           this.text2.setText(txt);
+	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
+	     }
+		
+		
+		if(e.getSource() == items2[6]){
+	           Integer[] aux = this.mo.QuickSort(this.lectura.ArrayInteger());
+	           String txt = "";
+	           for(Integer i: aux){
+	        	   txt += i+ " ";
+	           }
+	           this.text2.setText(txt);
+	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
+	           this.comparaciones.setText("Comparaciones: " + this.mo.getComparaciones()); 
+	           this.swaps.setText("Swaps: " + this.mo.getSwaps());
 	     }
 		
 		if(e.getSource() == items3){

@@ -2,7 +2,11 @@ package gui;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -64,7 +68,7 @@ public class Aplicacion extends JFrame implements ActionListener {
 		this.submenu2 = new JMenu("Ordenar");
 		this.submenu3 = new JMenu("Ayuda");
 		
-		this.items1 = new JMenuItem[3];
+		this.items1 = new JMenuItem[4];
 		this.items2 = new JMenuItem[7];
 		this.items3 = new JMenuItem("Acerca De");
 		
@@ -72,7 +76,10 @@ public class Aplicacion extends JFrame implements ActionListener {
 		
 		items1[0] = new JMenuItem("Cargar Archivo");
 		items1[1] = new JMenuItem("Guardar Archivo");
+		items1[3] = new JMenuItem("Generar archivo");
 		items1[2] = new JMenuItem("Salir");
+		
+		
 		
 		items2[0] = new JMenuItem("Burbuja");
 		items2[1] = new JMenuItem("Shell");
@@ -84,7 +91,9 @@ public class Aplicacion extends JFrame implements ActionListener {
 		
 		submenu1.add(items1[0]);
 		submenu1.add(items1[1]);
+		submenu1.add(items1[3]);
 		submenu1.add(items1[2]);
+		
 		
 		
 		submenu2.add(items2[0]);
@@ -112,6 +121,7 @@ public class Aplicacion extends JFrame implements ActionListener {
 		items1[0].addActionListener(this);
 		items1[1].addActionListener(this);
 		items1[2].addActionListener(this);
+		items1[3].addActionListener(this);
 		
 		items2[0].addActionListener(this);
 		items2[1].addActionListener(this);
@@ -143,9 +153,17 @@ public class Aplicacion extends JFrame implements ActionListener {
 			
 			try {
 				
-				this.lectura = new Lectura(JOptionPane.showInputDialog("Ruta del Archivo"));
-				this.lectura.generar();
-				this.text.setText(this.lectura.getTexto());
+				
+				JFileChooser jf = new JFileChooser();
+				int valor = jf.showOpenDialog(this);
+				if(valor == jf.APPROVE_OPTION){
+					this.lectura = new Lectura(jf.getSelectedFile().getPath());
+					
+					this.lectura.generar();
+					this.text.setText(this.lectura.getTexto());
+				}
+				
+				
 			} catch (HeadlessException | ExceptionArchivo e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -155,6 +173,41 @@ public class Aplicacion extends JFrame implements ActionListener {
 		
 		if(e.getSource() == items1[1]){
 			this.lectura.escribir(JOptionPane.showInputDialog("Nombre del Archivo"));
+        }
+		
+		if(e.getSource() == items1[3]){
+			String nombre = "";
+            JFileChooser jf = new JFileChooser(System.getProperty("user.dir"));
+            jf.showSaveDialog(this);
+            File g = jf.getSelectedFile();
+            
+            if(g != null){
+            	Random r = new Random();
+    			String texto = "";
+    			for(int i = 1; i <= 1000;i++){
+    				if(i %20 == 0){
+    					texto += "\n";
+    				}else{
+    					texto += r.nextInt(1000) + " ";
+    				}
+    			}
+    			FileWriter fw;
+				try {
+					fw = new FileWriter(g);
+					fw.write(texto);
+	    			fw.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			
+				/*FileWriter gu = new FileWriter(g);
+				gu.write("daniel2");
+				
+				gu.close();
+				*/
+            	
+            }
         }
 		
 		
@@ -244,7 +297,9 @@ public class Aplicacion extends JFrame implements ActionListener {
 	     }
 		
 		if(e.getSource() == items3){
-            JOptionPane.showMessageDialog(null, "Creado por Daniel Brena Aquino");
+           JOptionPane.showMessageDialog(null, "Creado por Daniel Brena Aquino");
+			
+			
         }
 	}
 }

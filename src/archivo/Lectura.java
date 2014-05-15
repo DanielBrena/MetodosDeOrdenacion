@@ -3,9 +3,11 @@ package archivo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import excepcion.ExceptionArchivo;
@@ -89,6 +91,15 @@ public class Lectura {
 			}
 		}
 	}
+	
+	public void escribir2(File file) throws IOException{
+		
+		
+			
+			
+		
+	}
+	
 	public ArrayList<String> generarArrayString(){
 		ArrayList<String> auxArray = new ArrayList<String>();
 		while(this.sc.hasNext()){

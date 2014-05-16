@@ -23,6 +23,7 @@ public class Lectura {
 	PrintWriter pw; 
 	
 	private String texto = "";
+	private String texto_escribir = "";
 	
 	
 	public Lectura(){
@@ -77,19 +78,33 @@ public class Lectura {
 	}
 	
 	public void escribir(String titulo){
+		
+		
 		try {
+			String[] aux = this.getTexto_escribir().split(" ");
+			
 			this.out =new PrintWriter(titulo+".txt");
+			
+			for(int i = 1; i < aux.length+1;i++){
+				//this.out.print(aux[i-1] +" ");
+				System.out.print(aux[i -1] + " ");
+				//if(i % 20 == 0){
+				//	this.out.println();
+					//System.out.println();
+				//}
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i = 1; i < this.arrayInteger.size()-1;i++){
+		/*for(int i = 1; i < this.arrayInteger.size()-1;i++){
 			if(i % 20 == 0){
 				this.out.println();
 			}else{
 				 this.out.print(i +" ");
 			}
-		}
+		}*/
+		
 	}
 	
 	public void escribir2(File file) throws IOException{
@@ -111,11 +126,16 @@ public class Lectura {
 	public void generar(){
 		
 		if(this.existe()){
+			int cont = 1;
 			while(this.sc.hasNext()){
 				String aux = this.sc.next();
 				this.arrayString.add(aux);
 				this.arrayInteger.add(Integer.parseInt(aux));
 				this.texto += aux + " ";
+				if(cont % 20 == 0){
+					this.texto += "\n";																																																													
+				}
+				cont++;
 				
 			}
 		}
@@ -192,6 +212,15 @@ public class Lectura {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+	
+
+	public String getTexto_escribir() {
+		return texto_escribir;
+	}
+
+	public void setTexto_escribir(String texto_escribir) {
+		this.texto_escribir = texto_escribir;
 	}
 
 	public ArrayList<String> getArrayString() {

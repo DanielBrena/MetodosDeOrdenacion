@@ -27,6 +27,14 @@ public class Main {
 		mo.getTiempo().mostrarDiferencia();
 		*/
 		Aplicacion app = new Aplicacion();
+		/*Random r = new Random();
+		for(int i = 1; i <=10000; i++){
+			System.out.print(r.nextInt(1000)+ " ");
+			if(i%20 == 0){
+				System.out.print("\n");
+				
+			}
+		}*/
 		
 		
 	}

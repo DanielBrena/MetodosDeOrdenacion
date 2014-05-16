@@ -172,7 +172,26 @@ public class Aplicacion extends JFrame implements ActionListener {
         }
 		
 		if(e.getSource() == items1[1]){
-			this.lectura.escribir(JOptionPane.showInputDialog("Nombre del Archivo"));
+			String nombre = "";
+            JFileChooser jf = new JFileChooser(System.getProperty("user.dir"));
+            jf.showSaveDialog(this);
+            File g = jf.getSelectedFile();
+            
+            if(g != null){
+            	Random r = new Random();
+    			FileWriter fw;
+				try {
+					fw = new FileWriter(g);
+					fw.write(this.text2.getText());
+	    			fw.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			
+            }
+			
+			
         }
 		
 		if(e.getSource() == items1[3]){
@@ -184,11 +203,12 @@ public class Aplicacion extends JFrame implements ActionListener {
             if(g != null){
             	Random r = new Random();
     			String texto = "";
-    			for(int i = 1; i <= 1000;i++){
-    				if(i %20 == 0){
+    			
+    			for(int i = 1; i <=10000; i++){
+    				texto += r.nextInt(1000)+ " ";
+    				if(i%20 == 0){
     					texto += "\n";
-    				}else{
-    					texto += r.nextInt(1000) + " ";
+    					
     				}
     			}
     			FileWriter fw;
@@ -214,8 +234,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[0]){
            Integer[] aux = this.mo.Burbuja(this.lectura.ArrayInteger());
            String txt = "";
+           int cont = 1;
            for(Integer i: aux){
         	   txt += i+ " ";
+        	   if(cont % 20 == 0){
+        		   txt += "\n";
+        	   }
+        	   cont++;
            }
            this.text2.setText(txt);
            this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -226,8 +251,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[1]){
 	           Integer[] aux = this.mo.Shell(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -238,8 +268,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[2]){
 	           Integer[] aux = this.mo.Insercion(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -250,8 +285,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[3]){
 	           Integer[] aux = this.mo.Seleccion(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -262,8 +302,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[4]){
 	           Integer[] aux = this.mo.Heap(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -274,8 +319,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[5]){
 	           Integer[] aux = this.mo.BurbujaMejorada(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -287,8 +337,13 @@ public class Aplicacion extends JFrame implements ActionListener {
 		if(e.getSource() == items2[6]){
 	           Integer[] aux = this.mo.QuickSort(this.lectura.ArrayInteger());
 	           String txt = "";
+	           int cont = 1;
 	           for(Integer i: aux){
 	        	   txt += i+ " ";
+	        	   if(cont % 20 == 0){
+	        		   txt += "\n";
+	        	   }
+	        	   cont++;
 	           }
 	           this.text2.setText(txt);
 	           this.informacion.setText(this.mo.getTiempo().mostrarDiferencia());
@@ -298,7 +353,6 @@ public class Aplicacion extends JFrame implements ActionListener {
 		
 		if(e.getSource() == items3){
            JOptionPane.showMessageDialog(null, "Creado por Daniel Brena Aquino");
-			
 			
         }
 	}
